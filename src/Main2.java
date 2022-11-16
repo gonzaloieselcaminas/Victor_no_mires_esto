@@ -1,32 +1,38 @@
-public class Main2 {
+public class    Main2 {
     public static void main(String[] args) {
-        Hand player1 = new Hand();
-        Hand player2 = new Hand();
-        boolean gameOverPlayer1 = false;
-        boolean gameOverPlayer2 = false;
+        Player player1 = new Player("Victor");
+        Player player2 = new Player("Calvicie");
 
-        while (!gameOverPlayer1 && !gameOverPlayer2) {
-            if (!gameOverPlayer1) {
-                System.out.println("Turno de player 1");
-                System.out.println(player1);
-                gameOverPlayer1 = player1.getNewCard();
-                if (player1.blackJackNumber() >= 21) {
-                    gameOverPlayer1 = true;
-                    System.out.println(player1);
-                    System.out.println("Te has pasado de 21");
-                }
+        player1.playerTurn();
+        player2.playerTurn();
+
+        int player1Number = player1.getNumberValue();
+        int player2Number = player2.getNumberValue();
+
+        if (player1Number == 21 || player2Number == 21) {
+            if (player1Number == 21 && player2Number != 21) {
+                System.out.println(player1.getName() + " gana");
+            } else if (player1Number == player2Number) {
+                System.out.println("Empate");
+            } else {
+                System.out.println(player2.getName() + " gana");
             }
-            if (!gameOverPlayer2) {
-                System.out.println("Turno de player 2");
-                System.out.println(player2);
-                gameOverPlayer2 = player2.getNewCard();
-                if (player2.blackJackNumber() >= 21) {
-                    gameOverPlayer2 = true;
-                    System.out.println(player2);
-                    System.out.println("Te has pasado de 21");
-                }
+        } else if (player1Number > 21 || player2Number > 21) {
+            if (player1Number > 21 && player2Number > 21) {
+                System.out.println("Ambos pierden");
+            } else if (player1Number > 21) {
+                System.out.println(player2.getName() + " gana");
+            } else {
+                System.out.println(player1.getName() + " gana");
+            }
+        } else {
+            if (player1Number > player2Number) {
+                System.out.println(player1.getName() + " gana");
+            } else if (player1Number == player2Number) {
+                System.out.println("Empate");
+            } else {
+                System.out.println(player2.getName() + " gana");
             }
         }
-        // y aqui las condiciones de victoria que me dan mucho palo hacer
     }
 }
